@@ -1,32 +1,31 @@
-describe ("Scoreboard", function() {
+// describe ("Scoreboard", function() {
 
-	var scoreboard;
-	var player;
+// 	var scoreboard;
+// 	var player;
 
-	beforeEach(function() {
-		scoreboard = new Scoreboard(new Player())
-		player = new Player();
-	});
+// 	beforeEach(function() {
+// 		player = new Player();
+// 		scoreboard = new Scoreboard(player);
+// 	});
 
-	describe("by default", function() {
+// 	describe("by default", function() {
 
-		it("shows no score", function() {
-			expect(scoreboard.defaultScore).toEqual(0);
-		});
+// 		it("shows no score", function() {
+// 			expect(scoreboard.defaultScore).toEqual(0);
+// 		});
 
-	});
+// 	});
 
-	describe("is able to show a score", function() {
+// 	describe("is able to show a score", function() {
 
-		it("after a hitting 1 pin down", function() {
-			player.bowl();
-			expect(scoreboard.currentScore).toEqual(1);
-		});
+// 		it("after a hitting 1 pin down", function() {
+// 			player.bowl();
+// 			expect(scoreboard.currentScore()).toEqual(1);
+// 		});
 
+// 	});
 
-	});
-
-});
+// });
 
 describe ("Player", function() {
 
@@ -47,11 +46,46 @@ describe ("Player", function() {
 
 	describe("can bowl", function() {
 
-		it("and hit a pin over", function() {
-			player.bowl();
-			expect(player.currentScore).toEqual(1);
+		it("and hit a strike", function() {
+			player.strike();
+			expect(player.currentScore).toEqual(10);
+		});
+
+		it("and finish a 'turn'", function() {
+			player.strike();
+			expect(player.currentFrame).toEqual(2);
+		});
+
+	});
+
+	describe("when finshing", function() {
+
+		it("knows its total score", function() {
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			player.strike();
+			expect(player.totalScore).toEqual(100);
 		});
 
 	});
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
