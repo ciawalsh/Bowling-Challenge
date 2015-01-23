@@ -1,7 +1,10 @@
 var Scoreboard = function(player) {
 	this.defaultScore = 0;
-	this.currentScore = Player.currentScore;
+  this.player = player;
+};
 
+Scoreboard.prototype.currentScore = function() {
+  return this.player.currentScore;
 };
 
 var Player = function() {

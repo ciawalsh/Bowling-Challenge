@@ -4,8 +4,8 @@ describe ("Scoreboard", function() {
 	var player;
 
 	beforeEach(function() {
-		scoreboard = new Scoreboard(new Player())
 		player = new Player();
+		scoreboard = new Scoreboard(player)
 	});
 
 	describe("by default", function() {
@@ -20,7 +20,7 @@ describe ("Scoreboard", function() {
 
 		it("after a hitting 1 pin down", function() {
 			player.bowl();
-			expect(scoreboard.currentScore).toEqual(1);
+			expect(scoreboard.currentScore()).toEqual(1);
 		});
 
 
