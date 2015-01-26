@@ -44,37 +44,30 @@ describe ("Player", function() {
 
 	});
 
-	describe("can bowl", function() {
+	describe("can update score", function() {
 
-		it("and hit a strike", function() {
-			player.strike();
-			expect(player.currentScore).toEqual(10);
+		it("and it show on the board", function() {
+			player.updateScore(5);
+			expect(player.currentScore).toEqual(5);
 		});
 
-		it("and finish a 'turn'", function() {
-			player.strike();
-			expect(player.currentFrame).toEqual(2);
-		});
-
-	});
-
-	describe("when finshing", function() {
-
-		it("knows its total score", function() {
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			player.strike();
-			expect(player.totalScore).toEqual(100);
+		it("and it show in two sections within one frame", function() {
+			player.updateScore(5);
+			expect(player.currentScore).toEqual(5);
 		});
 
 	});
+
+	// describe("can update score", function() {
+
+	// 	it("and it show on the board", function() {
+	// 		player.updateScore(5);
+	// 		expect(player.currentScore).toEqual(5);
+	// 	});
+
+	// });
+
+
 
 });
 
