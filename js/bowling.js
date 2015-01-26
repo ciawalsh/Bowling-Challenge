@@ -113,14 +113,14 @@ Player.prototype.updateScore = function(pinsHit) {
 			if (parseInt(score) + parseInt(score2) < 10) {
 				this.attemptScore = score2;
 				this.frameScore = parseInt(score) + parseInt(score2);
-				this.currentScore += (parseInt(score)*2);
+				this.currentScore += (parseInt(score2)*2);
 				this.attemptNumberChange();
 				this.activateStrikeBonus();
 				this.endFrame();
 			} else if (parseInt(score) + parseInt(score2) == 10) {
 				this.frameScore = 10;
 				this.attemptScore = score2;
-				this.currentScore += (parseInt(score)*2);
+				this.currentScore += (parseInt(score2)*2);
 				this.attemptNumberChange();
 				this.activateStrikeBonus();
 				this.activateSpareBonus();
@@ -132,16 +132,6 @@ Player.prototype.updateScore = function(pinsHit) {
 	}
 };
 
-// Player.prototype.calculateFrameScore = function() {
-// 	if (this.frameScore == 10) {
-// 		var answer = prompt("Did you get a strike or spare?");
-// 		if (answer == "strike") {
-// 			return "Well done";
-// 		} else {
-// 			return "Just as good";
-// 		}
-// 	}
-// };
 
 Player.prototype.attemptNumberChange = function () {
 	if (this.attemptNumber == 1) {
