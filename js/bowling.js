@@ -7,7 +7,7 @@ var Player = function() {
 	this.frameScore = 0;
 	this.attemptNumber = 1;
 	this.strikeBonus = false;
-	this.spareBonue = false;
+	this.spareBonus = false;
 };
 
 Player.prototype.enterName = function(enteredName) {
@@ -16,38 +16,79 @@ Player.prototype.enterName = function(enteredName) {
 
 Player.prototype.updateScore = function(pinsHit) {
 	if (this.strikeBonus === false) {
-		if (this.attemptNumber === 1) {
-			score = prompt("What did you score on the first attempt?") || pinsHit;
-			if (score < 10) {
-				this.attemptScore = score;
-				this.currentScore += parseInt(score);
-				this.attemptNumberChange();
-			} else if (score == 10) {
-				this.frameScore = score;
-				this.attemptScore = score;
-				this.currentScore += parseInt(score);
-				this.activateStrikeBonus();
-				this.endFrame();
-			} else {
-				alert("Please enter a number between 1-10");
+		if (this.spareBonus === false) {
+			if (this.attemptNumber === 1) {
+				score = prompt("What did you score on the first attempt?") || pinsHit;
+				if (score < 10) {
+					this.attemptScore = score;
+					this.currentScore += parseInt(score);
+					this.attemptNumberChange();
+				} else if (score == 10) {
+					this.frameScore = score;
+					this.attemptScore = score;
+					this.currentScore += parseInt(score);
+					this.activateStrikeBonus();
+					this.endFrame();
+				} else {
+					alert("Please enter a number between 1-10");
+				}
+			}
+			else if (this.attemptNumber === 2) {
+				var score2 = prompt("What did you score the second attempt?") || pinsHit;
+				if (parseInt(score) + parseInt(score2) < 10) {
+					this.attemptScore = score2;
+					this.frameScore = parseInt(score) + parseInt(score2);
+					this.currentScore += parseInt(score2);
+					this.attemptNumberChange();
+					this.endFrame();
+				} else if (parseInt(score) + parseInt(score2) == 10) {
+					this.frameScore = 10;
+					this.attemptScore = score2;
+					this.currentScore += parseInt(score2);
+					this.attemptNumberChange();
+					this.activateSpareBonus();
+					this.endFrame();
+				} else {
+					alert("Please enter a number between 1-10");
+				}
 			}
 		}
-		else if (this.attemptNumber === 2) {
-			var score2 = prompt("What did you score the second attempt?") || pinsHit;
-			if (parseInt(score) + parseInt(score2) < 10) {
-				this.attemptScore = score2;
-				this.frameScore = parseInt(score) + parseInt(score2);
-				this.currentScore += parseInt(score2);
-				this.attemptNumberChange();
-				this.endFrame();
-			} else if (parseInt(score) + parseInt(score2) == 10) {
-				this.frameScore = 10;
-				this.attemptScore = score2;
-				this.currentScore += parseInt(score2);
-				this.attemptNumberChange();
-				this.endFrame();
-			} else {
-				alert("Please enter a number between 1-10");
+		else if (this.spareBonus === true) {
+			if (this.attemptNumber === 1) {
+				score = prompt("What did you score on the first attempt?") || pinsHit;
+				if (score < 10) {
+					this.attemptScore = score;
+					this.currentScore += (parseInt(score)*2);
+					this.attemptNumberChange();
+				} else if (score == 10) {
+					this.frameScore = score;
+					this.attemptScore = score;
+					this.currentScore += (parseInt(score)*2);
+					this.activateStrikeBonus();
+					this.activateSpareBonus();
+					this.endFrame();
+				} else {
+					alert("Please enter a number between 1-10");
+				}
+			}
+			else if (this.attemptNumber === 2) {
+				var score2 = prompt("What did you score the second attempt?") || pinsHit;
+				if (parseInt(score) + parseInt(score2) < 10) {
+					this.attemptScore = score2;
+					this.frameScore = parseInt(score) + parseInt(score2);
+					this.currentScore += parseInt(score2);
+					this.attemptNumberChange();
+					this.activateSpareBonus();
+					this.endFrame();
+				} else if (parseInt(score) + parseInt(score2) == 10) {
+					this.frameScore = 10;
+					this.attemptScore = score2;
+					this.currentScore += parseInt(score2);
+					this.attemptNumberChange();
+					this.endFrame();
+				} else {
+					alert("Please enter a number between 1-10");
+				}
 			}
 		}
 	}
@@ -82,6 +123,7 @@ Player.prototype.updateScore = function(pinsHit) {
 				this.currentScore += (parseInt(score)*2);
 				this.attemptNumberChange();
 				this.activateStrikeBonus();
+				this.activateSpareBonus();
 				this.endFrame();
 			} else {
 				alert("Please enter a number between 1-10");
@@ -124,3 +166,12 @@ Player.prototype.activateStrikeBonus = function() {
 		this.strikeBonus = false;
 	}
 };
+
+Player.prototype.activateSpareBonus = function() {
+	if (this.spareBonus === false) {
+		this.spareBonus = true;
+	} else {
+		this.spareBonus = false;
+	}
+};
+
